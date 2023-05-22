@@ -1,0 +1,58 @@
+syntax = "proto3";
+option java_package = "ex.grpc";
+package RaftNodes;
+
+
+service MsgService 
+{
+    rpc sendRequest (StringRequest) returns (StringReply) {}
+    rpc sendVoteRequest (StringVoteRequest) returns (StringVoteReply) {}
+    rpc sendStatusUpdateRequest (StringStatusUptateRequest) returns (StringStatusUptateReply) {}
+}
+
+message StringRequest 
+{
+    int32 nodeid = 1;
+    string nodestatus = 2;
+    int32 termnumber = 3;
+    string message = 4;
+    string address = 5;
+}
+
+message StringReply 
+{
+    int32 rcv_nodeid = 1;
+    string rcv_nodestatus = 2;
+    int32 rcv_termnumber = 3;
+    string rcv_message = 4;
+    string rcv_address = 5;
+}
+
+// VOTING
+
+message StringVoteRequest 
+{
+    int32 termnumber = 1;
+    string logname = 2;
+}
+
+message StringVoteReply 
+{
+    int32 rcv_termnumber = 1;
+    int32 rcv_nodeid = 2;
+    string rcv_vote = 3;
+}
+
+
+// STATUS UPDATE
+
+message StringStatusUptateRequest
+{
+    string status = 1;
+}
+
+
+message StringStatusUptateReply
+{
+    string rcv_status = 1;
+}

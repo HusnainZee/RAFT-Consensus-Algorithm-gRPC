@@ -1,0 +1,3 @@
+/home/husnain/Music/ASM 6/cmake/build/CMakeFiles/server.dir
+/home/husnain/Music/ASM 6/cmake/build/CMakeFiles/edit_cache.dir
+/home/husnain/Music/ASM 6/cmake/build/CMakeFiles/rebuild_cache.dir
