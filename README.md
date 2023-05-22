@@ -80,7 +80,7 @@ When a Candidate receives votes from other nodes, it processes the responses.
   - $ pushd cmake/build
   - $ cmake -DCMAKE_PREFIX_PATH=$MY_INSTALL_DIR ../..
   - $ make -j 4
-- After running the commands, you can execute the server.cc file by typing in the terminal: 
+- After running the commands, you can execute the server.cc file by typing in the terminal: </br>
 $ ./server [Node Id] [Follower/Candidate] [Term Number] [Port Address] [Message to be Sent] 
 - You need to run these commands for each process in multiple terminals (max 5) in order to simulate the distributed environment.
 
