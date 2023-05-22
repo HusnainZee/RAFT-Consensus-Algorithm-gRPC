@@ -71,3 +71,14 @@ When a Candidate receives votes from other nodes, it processes the responses.
 - After receiving acknowledgments about the selection of Leader, the node processes terminate.
 - Each node maintains a log file that records the contents of messages sent and received along with their corresponding Term numbers.
 - The log files can be accessed and read after the processes have been terminated.
+
+## Project Setup
+- Install gRPC by following their offical documentation.
+- Clone this repo in grpc/examples/cpp/
+- Open the given directory in terminal and run the following commands:
+  - $ mkdir -p cmake/build
+  - $ pushd cmake/build
+  - $ cmake -DCMAKE_PREFIX_PATH=$MY_INSTALL_DIR ../..
+  - $ make -j 4
+- After running the commands, you can execute the server.cc file by typing in the terminal: $ ./node 4001 Follower term_no where term_no can be any number and 4001 is the port number Note that you are supposed to run this executable in multiple terminals (max 4) in order to simulate the distributed environment. You can only the following port numbers: 4001, 4002, 4003, 4004.
+
