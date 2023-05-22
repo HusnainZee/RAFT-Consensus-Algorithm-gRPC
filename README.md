@@ -40,34 +40,34 @@ The Raft algorithm is a consensus algorithm designed for distributed systems to 
 ### Requesting Votes as a Candidate:
 
 - Candidate processes wait for a random interval before sending a request for votes to all other nodes.
-The vote request message includes the Candidate's Term number and the name of its log file.
-Upon sending the request, the Candidate process increments its Term number by 1.
-The vote request aims to gather votes from other nodes to become the leader.
-
+- The vote request message includes the Candidate's Term number and the name of its log file.
+- Upon sending the request, the Candidate process increments its Term number by 1.
+- The vote request aims to gather votes from other nodes to become the leader.
+ 
 ### Voting Process:
 
 When a node receives a vote request, it checks its own state and Term number before voting.
-If the node has already voted for another candidate (hasVoted is true), it votes "NO" with its own Term number and Node ID.
-If the node has not voted (hasVoted is false), it compares the Candidate's Term number with its own.
-If the Candidate's Term number is lower, indicating outdated information, the node votes "NO" with its own Term number and Node ID.
-If the Candidate's Term number is equal or higher, the node votes "YES" with its own Term number and Node ID.
+- If the node has already voted for another candidate (hasVoted is true), it votes "NO" with its own Term number and Node ID.
+- If the node has not voted (hasVoted is false), it compares the Candidate's Term number with its own.
+- If the Candidate's Term number is lower, indicating outdated information, the node votes "NO" with its own Term number and Node ID.
+- If the Candidate's Term number is equal or higher, the node votes "YES" with its own Term number and Node ID.
 
 ### Candidate Processing Votes:
 
 When a Candidate receives votes from other nodes, it processes the responses.
-If any vote is "NO," the Candidate checks the corresponding Term number against its own.
-If the Term number is not less, the Candidate updates its status to Follower, accepting that it is not up to date.
-If a vote is "YES," the Node ID is added to the set of nodes that have voted "YES."
-If the set size reaches (N/2 + 1), where N is the total number of nodes, the Candidate changes its status to Leader.
-The Candidate then sends a message to all nodes, notifying them of its new status.
+- If any vote is "NO," the Candidate checks the corresponding Term number against its own.
+- If the Term number is not less, the Candidate updates its status to Follower, accepting that it is not up to date.
+- If a vote is "YES," the Node ID is added to the set of nodes that have voted "YES."
+- If the set size reaches (N/2 + 1), where N is the total number of nodes, the Candidate changes its status to Leader.
 
-### Leader Election and Consensus:
 
-Once a Candidate becomes a Leader, it initiates the leader election process.
-The Leader sends a message to all nodes, announcing its new status as the Leader.
-From this point on, the Leader coordinates the consensus process, replicating log entries and maintaining system consistency.
-System Termination and Log Files:
+### Leader Selection and its Acknowledgment:
 
-After sending the initial "hello" messages, the node processes terminate.
-Each node maintains a log file that records the contents of messages sent and received along with their corresponding Term numbers.
-The log files can be accessed and read after the processes have terminated.
+- Once a Candidate becomes a Leader, it then sends a message to all nodes, notifying them of its new status as the Leader.
+- The status of other Candidate processes are set to Follower to ensure there is a only one Leader.
+
+### System Termination and Log Files:
+
+- After receiving acknowledgments about the selection of Leader, the node processes terminate.
+- Each node maintains a log file that records the contents of messages sent and received along with their corresponding Term numbers.
+- The log files can be accessed and read after the processes have been terminated.
