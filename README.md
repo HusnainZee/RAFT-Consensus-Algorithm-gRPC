@@ -10,8 +10,8 @@ This project is the implementation of the Raft Consensus Algorithm in the Distri
 ## Overview
 The Raft algorithm is a consensus algorithm designed for distributed systems to ensure fault tolerance and consistency. It is used to elect a leader among a group of nodes. The algorithm provides safety guarantees, including leader election and node status changes from Candidate to Leader or from Candidate to Follower. It is commonly used in distributed databases and replicated state machines.
 
-### Project Details
-## System Overview:
+## Project Details
+### System Overview:
 
 - The system consists of 5 node processes, each representing a distinct node in the distributed system.
 - Communication between nodes is done via Remote Procedure Calls (RPC) using a configuration file.
